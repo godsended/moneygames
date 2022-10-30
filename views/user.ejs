@@ -1,0 +1,101 @@
+<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="card border-0 shadow rounded-3 my-5">
+        <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Профиль</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <p class="font-weght-bold">Имя</p>
+                    </div>
+                    <div class="col">
+                        <p>
+                            <%= name%>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="font-weght-bold">Баланс</p>
+                    </div>
+                    <div class="col">
+                        <p><%= balance %> </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="font-weght-bold">Почта</p>
+                    </div>
+                    <div class="col">
+                        <p>
+                            <%= email%>
+                        </p>
+                    </div>
+                </div>
+                <form action="payout/payeer" method="post" class="row mb-2">
+                    <div class="col">
+                        <p class="btn btn-primary" style="background-color: #55acee;" role="button">Payeer</p>
+                    </div>
+                    <div class="col">
+                        <input name="payeer_id" placeholder="Номер счета" type="text"/>
+                    </div>
+                    <div class="col">
+                        <button type="submit">Вывести</button>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-primary" style="background-color: #ff8c00;" href="#!" role="button">Qiwi</a>
+                    </div>
+                    <div class="col">
+                        <p>+375291111111</p>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary" id="result_panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Игровые клиенты</h3>
+                    </div>
+                    <form method="post" action="user/client">
+                        <label for="id">ID клиента</label>
+                        <input name="id" id="id" placeholder="12345678" required/>
+                        <button type="submit">Добавить</button>
+                    </form>
+
+                    <% if(error) { %>
+                        <p class="text-danger">
+                            <%= error %>
+                        </p>
+                        <% } %>
+                            <% if(clients) { %>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <% for(let client of clients) { %>
+                                            <li class="bg-light mb-3">
+                                                <strong>ID: <%= client.device_id %> </strong>
+                                                <p>
+                                                    Показы: <%= client.impressions %>
+                                                </p>
+                                                <a href="https://google.com">Отвязать</a>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+                                <% } %>
+
+                </div>
+            </div>
+            <div class='text-center'>
+                <a href="/auth/logout">Выйти</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .list-group {
+        max-height: 300px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>

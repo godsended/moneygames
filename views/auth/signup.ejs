@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Регистрация</h5>
+                    <form class="mb-3 needs-validation" novalidate action="signup" method="post">
+                        <div class="form-floating mb-3">
+                            <label for="floatingName">Имя</label>
+                            <input name="name" type="text" class="form-control" id="floatingName" placeholder="Иван"
+                                required>
+                            <div class="invalid-feedback">
+                                Введите имя!
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label for="floatingInput">Почта</label>
+                            <input name="email" type="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" required>
+                            <div class="invalid-feedback">
+                                Введите корректную почту!
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <label for="password">Пароль</label>
+                            <input name="password" type="password" class="form-control" id="password"
+                                placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Пароль должен содержать не менее 8 символов!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <% if(error) { %>
+                                <p class="text-danger">
+                                    <%= error %>
+                                </p>
+                                <% } %>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login" type="submit">
+                                Зарегестрироваться</button>
+                        </div>
+                    </form>
+                    <div class="d-grid">
+                        <a class="text-center" href="/auth/login">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict'
+
+        var form = document.querySelector('.needs-validation');
+        var password = document.getElementById('password');
+
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity() || password.value.length < 8) {
+                event.preventDefault();
+                event.stopPropagation();
+                password.value = "";
+            }
+
+            form.classList.add('was-validated');
+        }, false)
+    })()
+</script>

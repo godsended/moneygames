@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "database": "mgdb",
+            "username": "ilakolesnikov",
+            "password": "174285396020",
+            "name": "mgdb"
+        }
+    ]
+}

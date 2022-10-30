@@ -1,0 +1,13 @@
+<h1>ADMIN PANEL</h1>
+<div>
+    <h2>CONSTANTS</h2>
+    <div>
+         <% for(let c of constants) {%>
+            <form method="post">
+                <input name='name' value="<%= c.name %>" readonly/>
+                <input name='value' value="<%= c.value %>" />
+                <button type="submit">Edit</button>
+            </form>
+         <% } %> 
+    </div>
+</div>
