@@ -6,26 +6,35 @@
 
 var app = require('../app');
 var debug = require('debug')('moneygames:server');
-var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(
+  // Provide the private and public key to the server by reading each
+  // file's content with the readFileSync() method.
+  {
+    key: fs.readFileSync("localhost-key.pem"),
+    cert: fs.readFileSync("localhost.pem"),
+  },
+  app
+);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, () => console.log(`Server is running on ${port}`));
 server.on('error', onError);
 server.on('listening', onListening);
 
