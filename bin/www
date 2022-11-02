@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('moneygames:server');
 var https = require('https');
 var fs = require('fs');
+var {cert, certKey} = require('../private/https/cert')
 
 /**
  * Get port from environment and store in Express.
@@ -24,8 +25,8 @@ var server = https.createServer(
   // Provide the private and public key to the server by reading each
   // file's content with the readFileSync() method.
   {
-    key: fs.readFileSync("localhost-key.pem"),
-    cert: fs.readFileSync("localhost.pem"),
+    key: fs.readFileSync(certKey),
+    cert: fs.readFileSync(cert),
   },
   app
 );
