@@ -8,13 +8,13 @@ var app = require('../app');
 var debug = require('debug')('moneygames:server');
 var https = require('https');
 var fs = require('fs');
-var {cert, certKey} = require('../private/https/cert')
+var {cert, certKey, chain} = require('../private/https/cert')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(process.env.PORT || '443');
 app.set('port', port);
 
 /**
@@ -26,7 +26,8 @@ var server = https.createServer(
   // file's content with the readFileSync() method.
   {
     key: fs.readFileSync(certKey),
-    cert: fs.readFileSync(cert),
+    cert: fs.readFileSync(cert), 
+    ca: fs.readFileSync(chain)
   },
   app
 );

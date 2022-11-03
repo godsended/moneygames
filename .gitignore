@@ -1,2 +1,4 @@
 private
 *.pem
+var
+*.crt
